@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Notification</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Notification</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for noti in notify %}
+            <tr>
+              <th scope="row"><p> Truck number {{ noti.truck_number }}
+              {% if noti.remainded_day_insurane == thirty or noti.remainded_day_insurane == fifteen or noti.remainded_day_insurane == seven %}
+
+                  has {{ noti.remaining_insurance }} days for insurance paper,
+                  {% endif %}
+              {% if noti.remainded_day_fitness == thirty or noti.remainded_day_fitness == fifteen or noti.remainded_day_fitness == seven %}
+
+                  has {{ noti.remaining_fitness }} days for fitness certificate,
+                  {% endif %}
+              {% if noti.remainded_day_pollution == thirty or noti.remainded_day_pollution == fifteen or noti.remainded_day_pollution == seven %}
+
+                  has {{ noti.remaining_pollution }} days for pollution certificate.
+                  {% endif %}
+              </p></th>
+              <td><a href="{% url 'notification_mark' pk=noti.truck_number %}">mark as read</a></td>
+            </tr>
+           {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+{% endblock %}
